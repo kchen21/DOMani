@@ -28,7 +28,9 @@ The `DOMNodeCollection` class holds an array of DOM nodes (HTML elements) and ha
 
 ### DOM Manipulation Methods
 
-`DOMNodeCollection` contains seven DOM manipulation methods that act on the nodes: `html`, `empty`, `append`, `remove`, `attr`, `addClass`, and `removeClass`.
+`DOMNodeCollection` contains seven DOM manipulation methods that act on the nodes: `html`, `empty`, `append`, `remove`, `attr`, `addClass`, `removeClass`, `on`, and `off`.
+
+<!-- TODO: Write explanations for on and off -->
 
 To demonstrate these methods, please consider the following snippet of HTML, which I will use as a foundation for manipulation in each example:
 
@@ -135,4 +137,141 @@ creates the following change:
   <div class="question">How's are things?</div>
   <div class="question">What's new?</div>
 </div>
+```
+
+#### #attr
+
+`attr` can either set or get an attribute. It must receive one argument, but can receive up to two. If it receives one argument, the argument itself is interpreted as an attribute name, and `attr` will find its corresponding value in the first node. If it receives two, the first argument is interpreted as an attribute name and the second is interpreted as its corresponding value, and `attr` sets the name-value pair as an attribute of each node's HTML. For example, the following code:
+
+```javascript
+$l('.statement').attr('length', 'short');
+```
+
+creates the following change:
+
+```html
+<h2>Greetings</h2>
+<div class="greetings-container">
+  <div class="statement" length="short">Hello</div>
+  <div class="statement" length="short">Hi</div>
+</div>
+
+<h2>More Greetings</h2>
+<div class="greetings-container">
+  <div class="question">How's are things?</div>
+  <div class="question">What's new?</div>
+</div>
+```
+
+#### #addClass
+
+`addClass`receives a string argument which it interprets as a class value. It sets the class of each node's HTML to the given value if no class exists and adds the given value to its current class value if it does. For example, the following code:
+
+```javascript
+$l('.statement').addClass('basic');
+```
+
+creates the following change:
+
+```html
+<h2>Greetings</h2>
+<div class="greetings-container">
+  <div class="statement basic" length="short">Hello</div>
+  <div class="statement basic" length="short">Hi</div>
+</div>
+
+<h2>More Greetings</h2>
+<div class="greetings-container">
+  <div class="question">How's are things?</div>
+  <div class="question">What's new?</div>
+</div>
+```
+
+#### #removeClass
+
+`removeClass` receives a string argument which it interprets as a class value. For each node, it removes the given value from the set of class values for that element. For example, the following code:
+
+```javascript
+$l('.greetings-container > div').removeClass('question');
+```
+
+creates the following change:
+
+```html
+<h2>Greetings</h2>
+<div class="greetings-container">
+  <div class="statement">Hello</div>
+  <div class="statement">Hi</div>
+</div>
+
+<h2>More Greetings</h2>
+<div class="greetings-container">
+  <div class>How's are things?</div>
+  <div class>What's new?</div>
+</div>
+```
+
+### DOM Transversal Methods
+
+DOMNodeCollection contains methods that don't change the DOM, but traverse through it and return new instances of DOMNodeCollection that hold new DOM nodes. There are three of them in total: `children`, `parent`, and `find`.
+
+To demonstrate these methods, please consider the following snippet of HTML, which I will use as a foundation for traversal in each example:
+
+```html
+<h2>Greetings</h2>
+<div class="greetings-container">
+  <div class="statement">Hello</div>
+  <div class="statement">Hi</div>
+</div>
+
+<h2>More Greetings</h2>
+<div class="greetings-container">
+  <div class="question">How's are things?</div>
+  <div class="question">What's new?</div>
+</div>
+```
+
+#### #children
+
+`children` returns an instance of DOMNodeCollection that holds all children of all DOM nodes of the DOMNodeCollection object it is being called on. For example, the following code:
+
+```javascript
+$l('.greetings-container').children();
+```
+
+returns an instance of DOMNodeCollection that has an array consisting of four DOM nodes corresponding to:
+
+```html
+<div class="statement">Hello</div>
+<div class="statement">Hi</div>
+<div class="question">How's are things?</div>
+<div class="question">What's new?</div>
+```
+
+#### #parent
+
+`parent` returns an instance of DOMNodeCollection that holds all parents of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
+
+```javascript
+$l('.statement').parent();
+```
+returns an instance of DOMNodeCollection that has an array consisting of one DOM node corresponding to:
+
+```html
+<div class="greetings-container"></div>
+```
+
+#### #find
+
+`find` receives one string argument, which it interprets as a CSS selector, and returns an instance of DOMNodeCollection that holds all nodes that match the CSS selector, from the set of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
+
+```javascript
+$l('.greetings-container').find('.question');
+```
+
+returns an instance of DOMNodeCollection that has an array consisting of two DOM nodes corresponding to:
+
+```html
+<div class="question">How's are things?</div>
+<div class="question">What's new?</div>
 ```
