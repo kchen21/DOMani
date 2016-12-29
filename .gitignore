@@ -1,2 +1,3 @@
-./lib/DOMani.js
-./lib/DOMani.js.map
+node_modules/
+lib/DOMani.js
+lib/DOMani.js.map
