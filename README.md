@@ -4,11 +4,11 @@ DOMani is a lightweight JavaScript DOM manipulation library.
 
 ## Core Function
 
-DOMani has a core function `$l`, which accepts one argument, which can either be a CSS selector, an instance of `HTMLElement`, or a function. If the argument is a CSS selector, it returns an custom `DOMNodeCollection` object that holds the DOM nodes that match the selector. `DOMNodeCollection` is a class that holds DOM nodes in general and has methods for DOM transversal and manipulation.
+DOMani has a core function `$l` that accepts one argument, which can either be a string representing a CSS selector, an instance of `HTMLElement`, or a function. If the argument is a CSS selector, it returns a custom `DOMNodeCollection` object that holds the DOM nodes that match the selector. `DOMNodeCollection` is a class that holds DOM nodes in general and has methods for DOM transversal and manipulation.
 
 If `$l` receives an instance of `HTMLElement`, then it returns a `DOMNodeCollection` object that holds that node. If it receives a function, then one of two things can happen, depending on whether or not the `document` is ready (i.e. the HTML has finished rendering). If the `document` is ready, it will call the function. If not, it will add it to a growable array of functions to be invoked as callbacks when the `document` is ready.
 
-$l has three methods: `extend`, `ajax`, and `ajax2`. `extend` receives two or more objects as arguments and merges them. Note: It mutates and returns the first argument.
+`$l` has three methods: `extend`, `ajax`, and `ajax2`. `extend` receives two or more objects as arguments and merges them. Note: It mutates and returns the first argument.
 
 ```javascript
 const objA = {a: 'apple', b: 'apple', c: 'apple'};
@@ -29,8 +29,6 @@ The `DOMNodeCollection` class holds an array of DOM nodes (HTML elements) and ha
 ### DOM Manipulation Methods
 
 `DOMNodeCollection` contains seven DOM manipulation methods that act on the nodes: `html`, `empty`, `append`, `remove`, `attr`, `addClass`, `removeClass`, `on`, and `off`.
-
-<!-- TODO: Write explanations for on and off -->
 
 To demonstrate these methods, please consider the following snippet of HTML, which I will use as a foundation for manipulation in each example:
 
@@ -211,6 +209,28 @@ creates the following change:
 </div>
 ```
 
+#### #on
+
+`on` adds an event handler to each node's HTML. It receives two arguments: a string and a function. The string represents an event type such as 'click' while the function represents the listener that will correspond to it. For example, the following code:
+
+```javascript
+const questionClicked = () => {
+  alert('You\'ve clicked on a question!');
+};
+
+$l('.question').on('click', questionClicked);
+```
+
+adds an event handler to all nodes that have a class value of 'question'. The page will now show an alert containing "You've clicked on a question!" if either "How are things?" or "What's new?" is clicked.
+
+#### #off
+
+`off` receives one argument: a string representing an event type. For each node, if there happens to be an event listener for that event type at the moment, it will remove that event listener from the node's HTML. To demonstrate, assume that I have added the event handler in the example for `on`. I can now remove that event handler using `off` like so:
+
+```javascript
+$l('.question').off('click');
+```
+
 ### DOM Transversal Methods
 
 DOMNodeCollection contains methods that don't change the DOM, but traverse through it and return new instances of DOMNodeCollection that hold new DOM nodes. There are three of them in total: `children`, `parent`, and `find`.
@@ -263,7 +283,7 @@ returns an instance of DOMNodeCollection that has an array consisting of one DOM
 
 #### #find
 
-`find` receives one string argument, which it interprets as a CSS selector, and returns an instance of DOMNodeCollection that holds all nodes that match the CSS selector, from the set of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
+`find` receives one string argument, which it interprets as a CSS selector, and returns an instance of DOMNodeCollection that holds all descendants that match the CSS selector, from the set of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
 
 ```javascript
 $l('.greetings-container').find('.question');
