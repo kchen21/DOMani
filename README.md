@@ -28,7 +28,7 @@ The `DOMNodeCollection` class holds an array of DOM nodes (HTML elements) and ha
 
 ### DOM Manipulation Methods
 
-`DOMNodeCollection` contains seven DOM manipulation methods that act on the nodes: `html`, `empty`, `append`, `remove`, `attr`, `addClass`, `removeClass`, `on`, and `off`.
+`DOMNodeCollection` contains seven DOM manipulation methods that act on the nodes: `#html`, `#empty`, `#append`, `#remove`, `#attr`, `#addClass`, `#removeClass`, `#on`, and `#off`.
 
 To demonstrate these methods, please consider the following snippet of HTML, which I will use as a foundation for manipulation in each example:
 
@@ -48,7 +48,7 @@ To demonstrate these methods, please consider the following snippet of HTML, whi
 
 #### #html
 
-`html` can receive an optional HTML string argument. If it receives an HTML string, it sets each node's inner HTML as the HTML. For example, the following code:
+`#html` can receive an optional HTML string argument. If it receives an HTML string, it sets each node's inner HTML as the HTML. For example, the following code:
 
 ```javascript
 $l('.greetings-container').html('<p>new innerHTML</p>');
@@ -68,11 +68,11 @@ creates the following change:
 </div>
 ```
 
-If `html` doesn't receive an argument, it returns the inner HTML of the first node.
+If `#html` doesn't receive an argument, it returns the inner HTML of the first node.
 
 #### #empty
 
-`empty` clears out each node's inner HTML. For example, the following code:
+`#empty` clears out each node's inner HTML. For example, the following code:
 
 ```javascript
 $l('.greetings-container').empty();
@@ -90,8 +90,8 @@ creates the following change:
 
 #### #append
 
-`append` receives one argument, which can either be an instance of `HTMLElement`, an HTML string, or an instance of `DOMNodeCollection`.
-If it receives an instance of HTMLElement or an HTML string, it adds the HTML to each node's current inner HTML. If it receives an instance of DOMNodeCollection, `append` adds each node of that instance to each node of the instance that it is being called on, and removes the original argument's nodes using `remove`, which will be explained later on. For example, the following code:
+`#append` receives one argument, which can either be an instance of `HTMLElement`, an HTML string, or an instance of `DOMNodeCollection`.
+If it receives an instance of HTMLElement or an HTML string, it adds the HTML to each node's current inner HTML. If it receives an instance of DOMNodeCollection, `#append` adds each node of that instance to each node of the instance that it is being called on, and removes the original argument's nodes using `#remove`, which will be explained later on. For example, the following code:
 
 ```javascript
 $l('.greetings-container').append($l('h2'));
@@ -117,7 +117,7 @@ creates the following change:
 
 #### #remove
 
-`remove` removes the HTML of each node from the DOM, and also removes all nodes from the array. For example, the following code:
+`#remove` removes the HTML of each node from the DOM, and also removes all nodes from the array. For example, the following code:
 
 ```javascript
 $l('h2').remove();
@@ -139,7 +139,7 @@ creates the following change:
 
 #### #attr
 
-`attr` can either set or get an attribute. It must receive one argument, but can receive up to two. If it receives one argument, the argument itself is interpreted as an attribute name, and `attr` will find its corresponding value in the first node. If it receives two, the first argument is interpreted as an attribute name and the second is interpreted as its corresponding value, and `attr` sets the name-value pair as an attribute of each node's HTML. For example, the following code:
+`#attr` can either set or get an attribute. It must receive one argument, but can receive up to two. If it receives one argument, the argument itself is interpreted as an attribute name, and `#attr` will find its corresponding value in the first node. If it receives two, the first argument is interpreted as an attribute name and the second is interpreted as its corresponding value, and `#attr` sets the name-value pair as an attribute of each node's HTML. For example, the following code:
 
 ```javascript
 $l('.statement').attr('length', 'short');
@@ -163,7 +163,7 @@ creates the following change:
 
 #### #addClass
 
-`addClass`receives a string argument which it interprets as a class value. It sets the class of each node's HTML to the given value if no class exists and adds the given value to its current class value if it does. For example, the following code:
+`#addClass`receives a string argument which it interprets as a class value. It sets the class of each node's HTML to the given value if no class exists and adds the given value to its current class value if it does. For example, the following code:
 
 ```javascript
 $l('.statement').addClass('basic');
@@ -187,7 +187,7 @@ creates the following change:
 
 #### #removeClass
 
-`removeClass` receives a string argument which it interprets as a class value. For each node, it removes the given value from the set of class values for that element. For example, the following code:
+`#removeClass` receives a string argument which it interprets as a class value. For each node, it removes the given value from the set of class values for that element. For example, the following code:
 
 ```javascript
 $l('.greetings-container > div').removeClass('question');
@@ -211,7 +211,7 @@ creates the following change:
 
 #### #on
 
-`on` adds an event handler to each node's HTML. It receives two arguments: a string and a function. The string represents an event type such as 'click' while the function represents the listener that will correspond to it. For example, the following code:
+`#on` adds an event handler to each node's HTML. It receives two arguments: a string and a function. The string represents an event type such as 'click' while the function represents the listener that will correspond to it. For example, the following code:
 
 ```javascript
 const questionClicked = () => {
@@ -225,7 +225,7 @@ adds an event handler to all nodes that have a class value of 'question'. The pa
 
 #### #off
 
-`off` receives one argument: a string representing an event type. For each node, if there happens to be an event listener for that event type at the moment, it will remove that event listener from the node's HTML. To demonstrate, assume that I have added the event handler in the example for `on`. I can now remove that event handler using `off` like so:
+`#off` receives one argument: a string representing an event type. For each node, if there happens to be an event listener for that event type at the moment, it will remove that event listener from the node's HTML. To demonstrate, assume that I have added the event handler in the example for `#on`. I can now remove that event handler using `#off` like so:
 
 ```javascript
 $l('.question').off('click');
@@ -233,7 +233,7 @@ $l('.question').off('click');
 
 ### DOM Transversal Methods
 
-DOMNodeCollection contains methods that don't change the DOM, but traverse through it and return new instances of DOMNodeCollection that hold new DOM nodes. There are three of them in total: `children`, `parent`, and `find`.
+DOMNodeCollection contains methods that don't change the DOM, but traverse through it and return new instances of DOMNodeCollection that hold new DOM nodes. There are three of them in total: `#children`, `#parent`, and `#find`.
 
 To demonstrate these methods, please consider the following snippet of HTML, which I will use as a foundation for traversal in each example:
 
@@ -253,7 +253,7 @@ To demonstrate these methods, please consider the following snippet of HTML, whi
 
 #### #children
 
-`children` returns an instance of DOMNodeCollection that holds all children of all DOM nodes of the DOMNodeCollection object it is being called on. For example, the following code:
+`#children` returns an instance of DOMNodeCollection that holds all children of all DOM nodes of the DOMNodeCollection object it is being called on. For example, the following code:
 
 ```javascript
 $l('.greetings-container').children();
@@ -270,7 +270,7 @@ returns an instance of DOMNodeCollection that has an array consisting of four DO
 
 #### #parent
 
-`parent` returns an instance of DOMNodeCollection that holds all parents of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
+`#parent` returns an instance of DOMNodeCollection that holds all parents of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
 
 ```javascript
 $l('.statement').parent();
@@ -283,7 +283,7 @@ returns an instance of DOMNodeCollection that has an array consisting of one DOM
 
 #### #find
 
-`find` receives one string argument, which it interprets as a CSS selector, and returns an instance of DOMNodeCollection that holds all descendants that match the CSS selector, from the set of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
+`#find` receives one string argument, which it interprets as a CSS selector, and returns an instance of DOMNodeCollection that holds all descendants that match the CSS selector, from the set of all DOM nodes of the DOMNodeCollection it is being called on. For example, the following code:
 
 ```javascript
 $l('.greetings-container').find('.question');
