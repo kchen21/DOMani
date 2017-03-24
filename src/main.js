@@ -1,9 +1,10 @@
 const DOMNodeCollection = require('./dom_node_collection');
+const Demo = require('./demo');
 
 const docReadyCallbacks = [];
 let docReady = false;
 
-window.$l = (arg) => {
+const $l = (arg) => {
   if (typeof arg === 'string') { // i.e. if it is a CSS selector
     const nodeList = document.querySelectorAll(arg);
     const htmlElements = Array.apply(null, nodeList);
@@ -27,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-window.$l.extend = (baseObj, ...objs) => {
+$l.extend = (baseObj, ...objs) => {
   objs.forEach( (obj) => {
     for (let key in obj) {
       baseObj[key] = obj[key];
@@ -37,7 +38,7 @@ window.$l.extend = (baseObj, ...objs) => {
   return baseObj;
 };
 
-window.$l.ajax = (options) => {
+$l.ajax = (options) => {
   if (typeof options === 'undefined') {
     options = {};
   }
@@ -68,9 +69,9 @@ window.$l.ajax = (options) => {
   xhr.send(options.data);
 };
 
-// window.$l.ajax2 returns a promise
+// $l.ajax2 returns a promise
 
-window.$l.ajax2 = (options) => {
+$l.ajax2 = (options) => {
   if (typeof options === 'undefined') {
     options = {};
   }
