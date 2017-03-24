@@ -1,6 +1,11 @@
 # DOMani
 
-DOMani is a lightweight JavaScript DOM manipulation library.
+[DOMani Testing Page][gh-pages] - a simple HTML page that allows the user to test DOMani's capabilities using the examples here and more
+
+[gh-pages]: https://kchen21.github.io/DOMani/
+
+DOMani is a lightweight JavaScript DOM manipulation library. It consists of a core function, $l, and various methods for DOM manipulation and traversal.
+
 
 ## Core Function
 
