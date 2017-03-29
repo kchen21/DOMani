@@ -60,10 +60,18 @@
 	
 	var $l = function $l(arg) {
 	  if (typeof arg === 'string') {
-	    // i.e. if it is a CSS selector
-	    var nodeList = document.querySelectorAll(arg);
-	    var htmlElements = Array.apply(null, nodeList);
-	    return new DOMNodeCollection(htmlElements);
+	    if (HelperMethods.forCreatingElement(arg)) {
+	      var tag = HelperMethods.parseTag(arg);
+	      var innerHTML = HelperMethods.parseInnerHTML(arg, tag.length);
+	      var newHTMLElement = document.createElement(tag);
+	      newHTMLElement.innerHTML = innerHTML;
+	      return new DOMNodeCollection([newHTMLElement]);
+	    } else {
+	      // i.e. if it is a CSS selector
+	      var nodeList = document.querySelectorAll(arg);
+	      var htmlElements = Array.apply(null, nodeList);
+	      return new DOMNodeCollection(htmlElements);
+	    }
 	  } else if (arg instanceof HTMLElement) {
 	    var element = [arg];
 	    return new DOMNodeCollection(element);

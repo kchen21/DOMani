@@ -5,10 +5,19 @@ const docReadyCallbacks = [];
 let docReady = false;
 
 const $l = (arg) => {
-  if (typeof arg === 'string') { // i.e. if it is a CSS selector
-    const nodeList = document.querySelectorAll(arg);
-    const htmlElements = Array.apply(null, nodeList);
-    return new DOMNodeCollection(htmlElements);
+  if (typeof arg === 'string') {
+    if (HelperMethods.forCreatingElement(arg)) {
+      const tag = HelperMethods.parseTag(arg);
+      const innerHTML = HelperMethods.parseInnerHTML(arg, tag.length);
+      const newHTMLElement = document.createElement(tag);
+      newHTMLElement.innerHTML = innerHTML;
+      return new DOMNodeCollection([newHTMLElement]);
+    } else {
+      // i.e. if it is a CSS selector
+      const nodeList = document.querySelectorAll(arg);
+      const htmlElements = Array.apply(null, nodeList);
+      return new DOMNodeCollection(htmlElements);
+    }
   } else if (arg instanceof HTMLElement) {
     const element = [arg];
     return new DOMNodeCollection(element);
