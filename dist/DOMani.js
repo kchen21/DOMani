@@ -46,7 +46,14 @@
 
 	'use strict';
 	
+	var _helper_methods = __webpack_require__(2);
+	
+	var HelperMethods = _interopRequireWildcard(_helper_methods);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	var DOMNodeCollection = __webpack_require__(1);
+	
 	
 	var docReadyCallbacks = [];
 	var docReady = false;
@@ -345,6 +352,37 @@
 	}();
 	
 	module.exports = DOMNodeCollection;
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var forCreatingElement = exports.forCreatingElement = function forCreatingElement(str) {
+	  return str[0] === "<" && str.slice(-1) === ">";
+	};
+	
+	var parseTag = exports.parseTag = function parseTag(str) {
+	  var tag = "";
+	
+	  for (var i = 1; i < str.length; i++) {
+	    if (str[i] === ">") {
+	      break;
+	    } else {
+	      tag += str[i];
+	    }
+	  }
+	
+	  return tag;
+	};
+	
+	var parseInnerHTML = exports.parseInnerHTML = function parseInnerHTML(str, tagLength) {
+	  return str.slice(tagLength + 2, str.length - tagLength - 3);
+	};
 
 /***/ }
 /******/ ]);

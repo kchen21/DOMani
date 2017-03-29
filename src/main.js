@@ -1,4 +1,5 @@
 const DOMNodeCollection = require('./dom_node_collection');
+import * as HelperMethods from './helper_methods';
 
 const docReadyCallbacks = [];
 let docReady = false;
