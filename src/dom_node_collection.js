@@ -48,7 +48,9 @@ class DOMNodeCollection {
 
   remove() {
     this.htmlElements.forEach( (el) => {
-      el.parentNode.removeChild(el);
+      if (el.parentNode) {
+        el.parentNode.removeChild(el);
+      }
     });
 
     const removedElements = this.htmlElements;
