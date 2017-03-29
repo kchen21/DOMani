@@ -11,7 +11,7 @@ DOMani is a lightweight JavaScript DOM manipulation library. It consists of a co
 
 DOMani has a core function `$l` that accepts one argument, which can either be a string, an instance of `HTMLElement`, or a function.
 
-If the argument is a string of the following format: '<tag>innerHTML</tag>', then `$l` creates a new DOM node using it and returns a custom `DOMNodeCollection` object that holds that node. If the argument is string representing a CSS selector, `$l` returns a `DOMNodeCollection` object that holds the DOM nodes that match the selector. `DOMNodeCollection` is a class that holds DOM nodes in general and has methods for DOM transversal and manipulation.
+If the argument is a string of the following format: '<tag>innerHTML</tag>', then `$l` creates a new DOM node using it and returns a custom `DOMNodeCollection` object that holds that node for manipulation purposes. If the argument is string representing a CSS selector, `$l` returns a `DOMNodeCollection` object that holds the DOM nodes that match the selector. `DOMNodeCollection` is a class that holds DOM nodes in general and has methods for DOM transversal and manipulation.
 
 If `$l` receives an instance of `HTMLElement`, then it returns a `DOMNodeCollection` object that holds that node. If it receives a function, then one of two things can happen, depending on whether or not the `document` is ready (i.e. the HTML has finished rendering). If the `document` is ready, it will call the function. If not, it will add it to a growable array of functions to be invoked as callbacks when the `document` is ready.
 
