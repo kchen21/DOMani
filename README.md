@@ -1,17 +1,17 @@
 # DOMani
 
-[DOMani Testing Page][gh-pages] - a simple HTML page that allows the user to test DOMani's capabilities using the examples here and more
+[Space Invaders Anno DOMani][space-invaders-anno-domani] - a fast-paced Space Invaders JavaScript browser game that utilizes DOMani
 
-[gh-pages]: https://kchen21.github.io/DOMani/
+[space-invaders-anno-domani]: https://github.com/kchen21/SpaceInvadersAnnoDOMani
 
-DOMani is a lightweight JavaScript DOM manipulation library. It consists of a core function, $l, and various methods for DOM manipulation and traversal.
+DOMani is a lightweight JavaScript DOM manipulation library. It consists of a core function, $l, and a class `DOMNodeCollection`, whose instances hold onto DOM elements, allowing its methods to manipulate and traverse them.
 
 
 ## Core Function
 
 DOMani has a core function `$l` that accepts one argument, which can either be a string, an instance of `HTMLElement`, or a function.
 
-If the argument is a string of the following format: '&lt;tag&gt;innerHTML&lt;/tag&gt;', then `$l` creates a new DOM element using it and returns a custom `DOMNodeCollection` object that holds that element for manipulation purposes. If the argument is string representing a CSS selector, `$l` returns a `DOMNodeCollection` object that holds the DOM nodes that match the selector. `DOMNodeCollection` is a class that has methods for manipulating and traversing the DOM nodes that its instances hold onto.
+If the argument is a string that has the following structure: '&lt;tag&gt;innerHTML&lt;/tag&gt;', then `$l` creates a new DOM element using it and returns a custom `DOMNodeCollection` object that holds that element for manipulation purposes. If the argument is string representing a CSS selector, `$l` returns a `DOMNodeCollection` object that holds the DOM nodes that match the selector.
 
 If `$l` receives an instance of `HTMLElement`, then it returns a `DOMNodeCollection` object that holds that node. If it receives a function, then one of two things can happen, depending on whether or not the `document` is ready (i.e. the HTML has finished rendering). If the `document` is ready, it will call the function. If not, it will add it to a growable array of functions to be invoked as callbacks when the `document` is ready.
 
